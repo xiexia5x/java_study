@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--配置注解扫描-->
+    <context:component-scan base-package="com.heima"/>
+    <!--配置视图解析器
+        作用：将逻辑视图转换成物理视图
+        hello===>/WEB-INF/pages/+hello+.jsp
+    -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--配置查找jsp视图的前置路径-->
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <!--配置查找jsp视图的后缀-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--开启springmvc注解驱动
+        @DateTimeFormat
+        @RequestBody
+        @Responsbody===>vo  str
+    -->
+    <mvc:annotation-driven/>
+
+    <!--方式2：使用springmvc提供的资源映射器
+        http://localhost:8080/htm/aa/bb/cc.html====>/html/aa/bb/cc.html
+    -->
+    <!--<mvc:resources mapping="/htm/**" location="/html/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>-->
+
+    <!--方法3：配置对静态资源放行-->
+    <mvc:default-servlet-handler/>
+
+    <!--配置文件上传解析器 bean名称必须为multipartResolver spring约定-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--配置上传文件大小
+            单位字节  5m= 1024*1024*5
+        -->
+        <property name="maxUploadSize" value="6000000"/>
+        <!--配置文件的编码格式-->
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+    <!--配置多个拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/user/loginPage"/>
+            <mvc:exclude-mapping path="/user/toLogin"/>
+            <bean class="com.heima.interceptor.Loginnterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+</beans>

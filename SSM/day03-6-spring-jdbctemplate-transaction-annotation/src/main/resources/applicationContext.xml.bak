@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--配置加载外部的properties资源-->
+<!--    <context:property-placeholder location="classpath:jdbc.properties" file-encoding="UTF-8"/>-->
+    <!--配置druid数据源-->
+    <!--<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="username" value="${jdbc.userName}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="driverClassName" value="${jdbc.driverClass}"/>
+    </bean>-->
+
+   <!--配置jdbcTemplate-->
+    <!--<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>-->
+
+    <!--配置dao-->
+    <!--<bean id="accountDao" class="com.heima.dao.impl.AccountDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>-->
+
+    <!--配置service-->
+    <!--<bean id="accountService" class="com.heima.service.impl.AccountServiceImpl">
+        <property name="accountDao" ref="accountDao"/>
+    </bean>-->
+    <!--开启注解扫描-->
+   <!-- <context:component-scan base-package="com.heima"/>-->
+
+    <!--事务管理器-->
+    <!--如果事务基于注解，那么该bean名称不建议随便写
+    @AliasFor("transactionManager")//约定
+	String value() default "";
+    -->
+   <!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>-->
+    <!--配置事务管理器下管理事务的属性 顾问 相当于配置了一个环绕通知
+        配置事务的管理策略
+            1.用哪个事务管理器
+            2.怎么管理事务
+    -->
+    <!--<tx:advice id="myAdivce" transaction-manager="transactionManager">
+        &lt;!&ndash;配置事务管理器管理事务的属性&ndash;&gt;
+        <tx:attributes>
+            &lt;!&ndash;*匹配任意方法，匹配时，越精确，优先级越高
+                 read-only="false"：非只读事务状态运行
+                 propagation="REQUIRED"：传播行为为REQUIRED
+            &ndash;&gt;
+            <tx:method name="*" read-only="false" propagation="REQUIRED"/>
+            &lt;!&ndash;
+                name="find*":匹配以find开头的方法
+                read-only="true"：指定对应的事务未只读事务
+                propagation="SUPPORTS"：指定当前已find开头的方法的事务的传播行为是SUPPORTS
+            &ndash;&gt;
+            <tx:method name="find*" read-only="true" propagation="SUPPORTS"/>
+            <tx:method name="query*" read-only="true" propagation="SUPPORTS"/>
+        </tx:attributes>
+    </tx:advice>
+    &lt;!&ndash;配置aop&ndash;&gt;
+    <aop:config>
+        &lt;!&ndash;配置事务管理器管理哪些类的方法
+            指定在哪些切入点采取myAdivce指定的事务策略管理
+        &ndash;&gt;
+        <aop:advisor advice-ref="myAdivce" pointcut="execution(public * com.heima.service.impl.*.*(..))"/>
+    </aop:config>-->
+    <!--开启aop支持-->
+  <!--  <aop:aspectj-autoproxy/>-->
+    <!--开启事务注解驱动-->
+   <!-- <tx:annotation-driven/>-->
+
+
+
+</beans>

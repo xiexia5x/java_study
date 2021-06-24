@@ -1,0 +1,57 @@
+{
+  "groups": [
+    {
+      "name": "init.man",
+      "type": "com.heima.pojo.Man",
+      "sourceType": "com.heima.pojo.Man"
+    }
+  ],
+  "properties": [
+    {
+      "name": "init.man.address",
+      "type": "java.lang.String[]",
+      "sourceType": "com.heima.pojo.Man"
+    },
+    {
+      "name": "init.man.address-list",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.heima.pojo.Man"
+    },
+    {
+      "name": "init.man.age",
+      "type": "java.lang.Integer",
+      "sourceType": "com.heima.pojo.Man"
+    },
+    {
+      "name": "init.man.birth",
+      "type": "java.util.Date",
+      "sourceType": "com.heima.pojo.Man"
+    },
+    {
+      "name": "init.man.boss",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.heima.pojo.Man"
+    },
+    {
+      "name": "init.man.hobbies",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "sourceType": "com.heima.pojo.Man"
+    },
+    {
+      "name": "init.man.user-name",
+      "type": "java.lang.String",
+      "sourceType": "com.heima.pojo.Man"
+    },
+    {
+      "name": "init.man.wifes",
+      "type": "java.util.List<com.heima.pojo.Woman>",
+      "sourceType": "com.heima.pojo.Man"
+    },
+    {
+      "name": "init.man.woman",
+      "type": "com.heima.pojo.Woman",
+      "sourceType": "com.heima.pojo.Man"
+    }
+  ],
+  "hints": []
+}

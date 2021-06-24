@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--方式1：使用默认构造函数创建对象 【主流】
+                使用无参构造函数
+                有参构造函数》di
+    -->
+    <!--<bean id="accountService1" class="com.heima.impl.AccountServiceImpl"/>-->
+    <!--方式2：使用静态工厂创建对象
+        factory-method：
+                表示该方法创建的对象被ioc容器管理
+                ctx.getBean("accountService2"),spring底层自动调用StaticFactory.getInstance()返回对象
+                并将对象加入ioc容器
+    -->
+   <!-- <bean id="accountService2" class="com.heima.factory.StaticFactory" factory-method="getInstance"/>-->
+
+    <!--方式3：非静态工厂-->
+    <!--步骤1：创建工厂对象-->
+    <bean id="instanceFactory" class="com.heima.factory.InstanceFactory"/>
+    <!--步骤2：使用创建的工厂对象，调用factory-method指定的方法获取对象，并加入ioc容器-->
+    <!--单例：在spring的ioc容器内，某个beanId只能对应一个对象-->
+    <bean id="accountService3" factory-bean="instanceFactory" factory-method="getInstance"/>
+    <!--
+        spring为了兼容早期的应用程序
+            早期：工厂+配置文件+发射
+    -->
+    <import resource="classpath:applicationContext-import.xml"/>
+</beans>

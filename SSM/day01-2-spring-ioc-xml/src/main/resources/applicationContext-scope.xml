@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--配置对象bean-->
+    <!--
+       bean标签：配置对象的标签
+            属性：
+                id:bean在ioc容器（工厂中）中的名称
+                class:指定bean对应的类的全限定名称
+                scope="singleton":显式指定当前bean的作用域是单例，不指定默认单例；
+    -->
+   <!-- <bean id="accountService1" scope="singleton" class="com.heima.impl.AccountServiceImpl"/>-->
+
+    <!--配置对象bean-->
+    <!--
+       bean标签：配置对象的标签
+            属性：
+                id:bean在ioc容器（工厂中）中的名称
+                class:指定bean对应的类的全限定名称
+                scope="prototype":指定当前bean的作用域是多例，此时spring只负责创建对象，不负责维护对象
+    -->
+    <bean id="accountService2" scope="prototype" class="com.heima.impl.AccountServiceImpl"/>
+
+
+</beans>

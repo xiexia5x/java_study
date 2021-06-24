@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heima.travel.mapper.RouteMapper">
+
+    <select id="popularityRoutes" resultType="Route">
+        select * from tab_route where rflag='1' order by count desc
+    </select>
+
+    <select id="newRoutes" resultType="Route">
+        select * from tab_route where rflag='1' order by rdate desc
+    </select>
+    <!--查询是旅游主题且最新的前4-->
+    <select id="themesRoutes" resultType="Route">
+        select * from tab_route where rflag='1' and isThemeTour='1' order by rdate desc
+    </select>
+
+    <select id="findRouteList" resultType="Route">
+        select * from tab_route
+        <where>
+            rflag='1'
+            <if test="cid!=null">
+                and cid=#{cid}
+            </if>
+            <if test="rname!=null">
+                and rname like concat('%',#{rname},'%')
+            </if>
+        </where>
+    </select>
+
+    <!--定义map映射-->
+    <resultMap id="routeInfoMap" type="Route" autoMapping="true">
+        <!--主表映射,开启自动映射后，如果列名与pojo类中属性名称一致，可自动动映射-->
+        <!--主键-->
+        <id column="rid" property="rid"/>
+        <result column="rname" property="rname"/>
+        <!--映射category-->
+        <association property="category" javaType="Category"  autoMapping="true">
+            <!--主键映射-->
+            <id  column="cid" property="cid"/>
+            <result column="cname" property="cname"/>
+        </association>
+        <!--映射seller-->
+        <association property="seller" javaType="Seller" autoMapping="true">
+            <id  column="sid" property="sid"/>
+            <result column="sname" property="sname"/>
+        </association>
+        <!--映射图片集合-->
+        <collection property="routeImgList" javaType="list" ofType="RouteImg" autoMapping="true">
+            <id  column="rgid" property="rgid"/>
+            <result column="bigPic" property="bigPic"/>
+        </collection>
+    </resultMap>
+    <select id="findRouteInfoByRid" resultMap="routeInfoMap">
+        select * from
+          tab_route as rt,
+          tab_seller sl,
+          tab_category as cg,
+          tab_route_img as ri
+        where
+            rt.sid = sl.sid
+            and rt.cid = cg.cid
+            and rt.rid = ri.rid
+            and rt.rid = #{rid}
+    </select>
+
+    <update id="updateCount">
+        update tab_route set count=count+#{count} where rid=#{rid}
+    </update>
+
+        <select id="findCountByRoutId" resultType="int">
+        select count from tab_route where rid=#{rid}
+    </select>
+
+    <select id="findRoutesFavoriteRank" resultType="Route">
+        select * from tab_route
+        <where>
+            rflag='1'
+            <if test="rname!=null and rname.trim!=''">
+                and rname like concat('%',#{rname},'%')
+            </if>
+            <if  test="startPrice!=null">
+                and price &gt;=#{startPrice}
+            </if>
+            <if  test="endPrice!=null">
+                and price &lt;=#{endPrice}
+            </if>
+        </where>
+        order by count desc
+    </select>
+
+</mapper>

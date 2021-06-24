@@ -1,0 +1,30 @@
+{
+  "groups": [
+    {
+      "name": "init.redis",
+      "type": "com.heima.props.RedisConfigProperties",
+      "sourceType": "com.heima.props.RedisConfigProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "init.redis.db",
+      "type": "java.lang.Integer",
+      "sourceType": "com.heima.props.RedisConfigProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "init.redis.host-name",
+      "type": "java.lang.String",
+      "sourceType": "com.heima.props.RedisConfigProperties",
+      "defaultValue": "localhost"
+    },
+    {
+      "name": "init.redis.port",
+      "type": "java.lang.Integer",
+      "sourceType": "com.heima.props.RedisConfigProperties",
+      "defaultValue": 6379
+    }
+  ],
+  "hints": []
+}

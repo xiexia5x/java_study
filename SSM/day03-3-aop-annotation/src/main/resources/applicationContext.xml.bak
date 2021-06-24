@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--配置目标对象的bean-->
+<!--    <bean id="userService" class="com.heima.service.impl.UserServiceImpl"/>-->
+    <!--配置通知类bean-->
+<!--    <bean id="myAspect" class="com.heima.MyAspect"/>-->
+    <!--开启注解扫描-->
+    <!--<context:component-scan base-package="com.heima"/>-->
+    <!--开启aop注解支持-->
+    <!--<aop:aspectj-autoproxy/>-->
+
+    <!--aop配置-->
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="myPt" expression="execution(public * com.heima.service.impl.*.*(..))"/>-->
+<!--        &lt;!&ndash;配置切面-->
+<!--            aop:aspect:切面的标签-->
+<!--                ref：引用指定的切面类-->
+<!--        &ndash;&gt;-->
+<!--        <aop:aspect ref="myAspect">-->
+<!--            &lt;!&ndash;切面信息：-->
+<!--             aop:before ：前置通知，在增强方法执行之前进行增强-->
+<!--             method：指定增强的方法-->
+<!--             pointcut：指定切入点表达式（类似于正则匹配哪些方法需要被增强）-->
+<!--            &ndash;&gt;-->
+<!--&lt;!&ndash;            <aop:before method="beforeAdvice" pointcut="execution(public * com.heima.service.impl.*.*(..))"/>&ndash;&gt;-->
+<!--           &lt;!&ndash;后置增强&ndash;&gt;-->
+<!--&lt;!&ndash;            <aop:after-returning method="afterReturningAdvice" pointcut="execution(public * com.heima.service.impl.*.*(..))"/>&ndash;&gt;-->
+<!--            &lt;!&ndash;异常通知&ndash;&gt;-->
+<!--&lt;!&ndash;            <aop:after-throwing method="afterThrowingAdvice" pointcut="execution(public * com.heima.service.impl.*.*(..))"/>&ndash;&gt;-->
+<!--            &lt;!&ndash;最终通知&ndash;&gt;-->
+<!--&lt;!&ndash;            <aop:after method="afterAdvice" pointcut="execution(public * com.heima.service.impl.*.*(..))"/>&ndash;&gt;-->
+<!--            &lt;!&ndash;环绕通知&ndash;&gt;-->
+<!--&lt;!&ndash;            <aop:around method="aroundAdvice" pointcut="execution(public * com.heima.service.impl.*.*(..))"/>&ndash;&gt;-->
+<!--            <aop:around method="aroundAdvice" pointcut-ref="myPt"/>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+</beans>

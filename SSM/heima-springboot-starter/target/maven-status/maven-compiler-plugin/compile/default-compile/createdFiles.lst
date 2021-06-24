@@ -1,0 +1,4 @@
+com\heima\config\ConnectionFactoryConfig.class
+com\heima\config\HeimRedisAutoConfiguration.class
+com\heima\props\RedisConfigProperties.class
+META-INF\spring-configuration-metadata.json

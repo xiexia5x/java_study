@@ -1,0 +1,45 @@
+# 键值对的集合
+#person:
+#   name: 张三
+#   age: 18
+# 单行配置
+person: {name: 张三,age: 18}
+
+#addresses:
+#   - 北京
+#   - 上海
+addresses: [北京,上海]
+
+# 纯量配置
+msg1: 'hello \n world'  # 单引忽略转义字符
+msg2: hello \n world
+msg3: "hello \n world"  # 双引识别转义字符
+
+
+# 参数引用
+name: ${person.name}
+
+init:
+  man:
+    userName: 鹿晗
+    birth: 2020/06/22 10:10:10
+    age: 20
+    address:
+      - 北京
+      - 上海
+    addressList: [北京,上海]
+    hobbies:
+      sports: [basketball,football]
+      music: [dj,rock]
+    wifes:
+      - userName: 杭梅梅
+        age: 18
+        addresses: [北京,重庆]
+      - userName: 杭梅梅2
+        age: 20
+        addresses: [北京,重庆]
+    woman:
+      userName: 杭梅梅
+      age: 18
+      addresses: [北京,重庆]
+    boss: true

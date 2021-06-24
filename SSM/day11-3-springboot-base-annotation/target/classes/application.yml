@@ -1,0 +1,5 @@
+init:
+  redis:
+    host-name: 127.0.0.1
+    db: 1
+    port: 6379

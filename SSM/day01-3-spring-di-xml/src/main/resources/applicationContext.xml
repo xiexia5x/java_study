@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <!--方式2：基于构造函数注入数据(知道) -->
+    <!--
+       constructor-arg标签表示输入构造器参数
+              name：与对应构造器的形参名称一致
+              value:对应值
+    -->
+    <!--<bean id="accountService1" class="com.heima.impl.AccountServiceImpl">
+        <constructor-arg name="name" value="zhansan"/>
+        <constructor-arg name="age" value="18"/>
+    </bean>-->
+
+    <!--方式2：setter注入 【开发主流】
+        前提：给对应的属性设置setter方法
+    -->
+    <bean id="accountService2" class="com.heima.impl.AccountServiceImpl">
+        <!--注入基本类型和string，直接使用value属性即可-->
+        <property name="name" value="lisi"/>
+        <property name="age" value="18"/>
+        <!--
+           注入bean对象类型
+          ref:(reference)指向某一天bean对象的id
+        -->
+        <property name="account" ref="account"/>
+        <!--注入数组 array：表示注入数组属性的对象-->
+        <property name="names">
+            <array>
+                <value>杨幂</value>
+                <value>露露</value>
+                <value>连连</value>
+            </array>
+        </property>
+        <!--注入list-->
+        <property name="accountList">
+            <list>
+                <!--ref指定关联的beanID-->
+                <ref bean="account"/>
+                <ref bean="account2"/>
+            </list>
+        </property>
+        <!--注入map-->
+        <property name="maps">
+            <map>
+                <entry key="name" value="zhansan"/>
+                <entry key="age" value="18"/>
+                <entry key="address" value="shanghai"/>
+            </map>
+        </property>
+        <!--注入properties-->
+        <property name="properties">
+            <props>
+                <prop key="name">李四</prop>
+                <prop key="age">18</prop>
+            </props>
+        </property>
+        <!--set集合注入-->
+        <property name="sets">
+            <set>
+                <value>1111</value>
+                <value>222</value>
+                <value>1111</value>
+            </set>
+        </property>
+
+    </bean>
+    <!--配置account bean-->
+    <bean id="account" class="com.heima.pojo.Account">
+        <property name="name" value="柳岩"/>
+        <property name="id" value="18"/>
+    </bean>
+    <bean id="account2" class="com.heima.pojo.Account">
+        <property name="name" value="柳岩2"/>
+        <property name="id" value="18"/>
+    </bean>
+
+</beans>

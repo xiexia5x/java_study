@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/axios.min.js"></script>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        姓名：<input type="text" v-model="user.name">
+        编号：<input type="text" v-model="user.id"><br>
+        <input type="button" @click="ajax01()" value="get-native-string">
+        <input type="button" @click="ajax02()" value="get-spring-string">
+        <input type="button" @click="ajax03()" value="get-spring-vo">
+        <input type="button" @click="ajax04()" value="post-spring-vo">
+        <div>
+            结果：{{result}}
+        </div>
+    </div>
+</body>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            result:"",
+            user:{
+                name:"",
+                id:""
+            },
+        },
+        methods:{
+            ajax01(){
+                let url="/test15";
+                axios.get(url).then(res=>{
+                    console.log(res);
+                    this.result=res.data;
+                })
+            },
+            ajax02(){
+                let url="/test16";
+                axios.get(url).then(res=>{
+                    console.log(res);
+                    this.result=res.data;
+                })
+            },
+            ajax03(){
+                let url="/test17";
+                axios.get(url,{params:this.user}).then(res=>{
+                    console.log(res);
+                    this.result=res.data;
+                    console.log(this.result.name,this.result.id)
+                })
+            },
+            ajax04(){
+                let url="/test18";
+                axios.post(url,this.user).then(res=>{
+                    console.log(res);
+                    this.result=res.data;
+                    console.log(this.result.name,this.result.id)
+                })
+            },
+        }
+
+    });
+</script>
+</html>

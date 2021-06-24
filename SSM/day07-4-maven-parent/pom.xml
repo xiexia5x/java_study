@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.heima</groupId>
+    <artifactId>day07-4-maven-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <!--打包方式是pom，用于聚合各个子模块-->
+    <packaging>pom</packaging>
+
+    <properties>
+        <!--提供公共的版本号，方便管理-->
+        <spring.version>5.0.2.RELEASE</spring.version>
+        <junit.version>4.13.2</junit.version>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!--
+        maven聚合工程的作用：
+        1.批量管理子工程的生命周期；
+        2.提供子工程的公共的依赖；
+        3.批量管理依赖的jar的版本（版本锁定）
+        4.批量管理插件版本
+    -->
+    <!--modules定义了父工程聚合的子工程-->
+    <modules>
+        <module>maven-pojo</module>
+        <module>maven-dao</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <!--版本锁定：不引入jar，仅仅锁定jar的版本
+        好处：统一定义jar的版本，避免了分模块开发时版本不一致的情况
+        子工程引入指定的jar时，可以不写版本号
+    -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <!--抽取常用的公共的插件，这样子工程不用反复引入-->
+        <plugins>
+            <!-- maven 指定编译编码和JDK -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+        <!--maven插件的版本锁定
+            插件不做引入，仅仅锁定版本
+        -->
+        <pluginManagement>
+            <plugins>
+                <!-- maven 生成项目源码插件 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.0.1</version>
+                    <executions>
+                        <execution>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- maven 打包 war插件 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.4</version>
+                    <configuration>
+                        <warName>${project.artifactId}</warName>
+                    </configuration>
+                </plugin>
+                <!-- tomcat7插件,命令： mvn tomcat7:run -DskipTests -->
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <version>2.2</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+</project>

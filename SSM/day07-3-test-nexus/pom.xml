@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.heima</groupId>
+    <artifactId>day07-3-test-nexus</artifactId>
+    <!--
+        如果版本以SNAPSHOT结尾，在deploy时，自动向SNAPSHOT类型的仓库发布，
+        否则像RELEASE类型的仓库发布
+    -->
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-xml -->
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-xml</artifactId>
+            <version>11.0.5</version>
+        </dependency>
+    </dependencies>
+    <!--配置仓库的url地址-->
+    <distributionManagement>
+
+        <repository>
+            <!--id与server对应的id一致-->
+            <id>heima-release</id>
+            <url>http://localhost:8081/repository/heima-release/</url>
+        </repository>
+
+        <snapshotRepository>
+            <!--id与settings文件下server对应的id一致-->
+            <id>heima-snapshots</id>
+            <url>http://localhost:8081/repository/heima-snapshot/</url>
+        </snapshotRepository>
+
+    </distributionManagement>
+
+
+</project>

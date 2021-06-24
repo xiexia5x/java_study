@@ -1,0 +1,19 @@
+#配置数据源
+spring:
+  datasource:
+    username: root
+    password: 1234
+    url: jdbc:mysql:///ssm?serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  type-aliases-package: com.heima.pojo
+  configuration:
+    #开启驼峰映射 table:aa_bb_cc 自动映射pojo中aabbcc/aaBbCc
+    map-underscore-to-camel-case: true
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
