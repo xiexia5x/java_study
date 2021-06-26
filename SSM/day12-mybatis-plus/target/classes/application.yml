@@ -1,0 +1,14 @@
+
+
+# 配置数据源
+spring:
+  datasource:
+    username: root
+    password: 1234
+    url: jdbc:mysql:///ssm
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#mybatis-plus配置控制台打印完整带参数SQL语句 开发阶段用；
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
